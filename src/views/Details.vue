@@ -48,7 +48,7 @@
 import ListView from '../components/List'
 
 export default {
-  name: 'Home',
+  name: 'Details',
   data() {
     return {
 
