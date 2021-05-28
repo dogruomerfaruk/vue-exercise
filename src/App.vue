@@ -25,25 +25,26 @@
     <a-layout>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          <a-form layout="inline" :form="form" @submit="handleSubmit">
+          <a-form layout="inline" :form="form">
             <a-form-item label="post title">
-      <a-input>
+      <input v-model="postTitle"/>
         
-      </a-input>
+
     </a-form-item>
     <a-form-item label="post content">
-      <a-input
-      >
+      <input v-model="postContent"/>
         
-      </a-input>
     </a-form-item>
     <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
-      <a-button type="primary">
+      <a-button type="primary" v-on:click="handlePost">
         Submit
       </a-button>
     </a-form-item>
     </a-form>
+    <ListView/>
         </div>
+
+      
       </a-layout-content>
       <a-layout-footer style="textAlign: center">
         
@@ -55,16 +56,20 @@
 
 <script>
 import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
+import ListView from './components/List.vue'
 
 export default {
   name: 'App',
   data() {
     return {
+      postTitle: "12",
+      postContent: "",
       formLayout: 'horizontal',
     };
   },
   components: {
     SmileOutlined,
+    ListView
   },
   methods: {
     onCollapse(collapsed, type) {
@@ -76,6 +81,21 @@ export default {
     handleFormLayoutChange(e) {
       this.formLayout = e.target.value;
     },
+    handlePost(){
+      fetch('https://jsonplaceholder.typicode.com/posts', {
+  method: 'POST',
+  body: JSON.stringify({
+    title: this.postTitle,
+    body: this.postContent,
+    userId: 1,
+  }),
+  headers: {
+    'Content-type': 'application/json; charset=UTF-8',
+  },
+})
+  .then((response) => response.json())
+  .then((json) => console.log(json));
+    }
   },
   computed: {
     formItemLayout() {
