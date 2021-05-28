@@ -1,23 +1,24 @@
 <template>
   <a-form layout="inline" :form="form">
     <a-form-item label="post title">
-      <input v-model="postTitle" />
+      <input v-model="postTitle" placeholder="title" />
     </a-form-item>
     <a-form-item label="post content">
-      <input v-model="postContent" />
+      <input v-model="postContent" placeholder="content"/>
     </a-form-item>
     <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
       <a-button type="primary" v-on:click="handlePost"> Submit </a-button>
     </a-form-item>
   </a-form>
+  <div :style="{ padding: '10%', background: '#fff', minHeight: '360px' }">
   <ul id="example-1">
     <li v-for="item in data" :key="item.id">
       {{ item.title }}
       <a-button type="link" v-on:click="deletePost(item.id)"> delete </a-button>
     </li>
     <a-pagination v-model="current" :total="50" @change="onChange"/>
-    <p>{{current}}</p>
   </ul>
+  </div>
 </template>
 <script>
 export default {
@@ -25,7 +26,7 @@ export default {
     return {
       data: [],
       show: false,
-      postTitle: "12",
+      postTitle: "",
       postContent: "",
       id: this.$route.params.id,
       current:2

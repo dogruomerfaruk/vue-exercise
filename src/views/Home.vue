@@ -11,7 +11,7 @@
     >
       
       <div class="sider">
-      <a-avatar :size="64" icon="user" />
+      <a-avatar :size="64" src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
       </div>
       <div class="sider2">
       <p>{{user.name}}</p>

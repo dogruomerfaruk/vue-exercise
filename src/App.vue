@@ -1,6 +1,8 @@
 <template>
   <div id="nav">
-    <router-link to="/">Users</router-link>
+    <router-link to="/">
+      <a-button type="primary">ALL USERS</a-button>
+    </router-link>
   </div>
   <router-view />
 </template>
