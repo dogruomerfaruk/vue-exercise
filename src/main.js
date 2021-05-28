@@ -11,11 +11,12 @@ import {
   Popconfirm,
   List,
 } from "ant-design-vue";
-import App from "./App.vue";
 import Router from "vue-router";
-import Vue from "vue";
+import App from "./App.vue";
 
-const app = createApp(App);
+import router from "./router";
+
+const app = createApp(App).use(router);
 app.config.productionTip = false;
 app.use(Router);
 app.use(Button);
