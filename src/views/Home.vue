@@ -1,6 +1,7 @@
 <template>
 
   <a-layout id="components-layout-demo-responsive">
+    <a-row>
     <a-layout-sider
       breakpoint="lg"
       collapsed-width="0"
@@ -23,7 +24,7 @@
       </div>
 
     </a-layout-sider>
-    
+     
     <a-layout>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
@@ -36,8 +37,11 @@
       <a-layout-footer style="textAlign: center">
         
       </a-layout-footer>
+      
     </a-layout>
+    </a-row>
   </a-layout>
+ 
 
 </template>
 
@@ -61,8 +65,8 @@ export default {
   },
   
    mounted (){
-     console.log(userId)
-    fetch('https://jsonplaceholder.typicode.com/users/' + userId)
+     this.userId = this.$route.params.id
+    fetch('https://jsonplaceholder.typicode.com/users/' + this.userId)
           .then(response => response.json())
           .then(data => {this.user = data; console.log(data)})
           .catch(error => console.log(error));
@@ -117,8 +121,8 @@ export default {
   margin-right: auto;
   width: 100%;
   padding-top: 2%;
-  padding-left: 20%;
-  padding-right: 0;
+  padding-left: 10%;
+
 }
 #components-layout-demo-responsive .ant-layout-sider {
   background: #92b7d1;

@@ -15,6 +15,8 @@
       {{ item.title }}
       <a-button type="link" v-on:click="deletePost(item.id)"> delete </a-button>
     </li>
+    <a-pagination v-model="current" :total="50" @change="onChange"/>
+    <p>{{current}}</p>
   </ul>
 </template>
 <script>
@@ -25,13 +27,13 @@ export default {
       show: false,
       postTitle: "12",
       postContent: "",
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      current:2
     };
   },
   mounted() {
-    this.data.push(this.newPost);
 
-    fetch(`https://jsonplaceholder.typicode.com/users/${this.id}/posts`)
+    fetch(`https://jsonplaceholder.typicode.com/users/${this.id}/posts/?_start=${0}&_limit=${3}`)
       .then((response) => response.json())
       .then((data) => (this.data = data))
       .catch((error) => console.log(error));
@@ -39,6 +41,16 @@ export default {
   props: [""],
 
   methods: {
+      onChange(current) {
+      this.current = current;
+
+        fetch(`https://jsonplaceholder.typicode.com/users/${this.id}/posts/?_start=${3*(this.current - 1)}&_limit=${3}`)
+      .then((response) => response.json())
+      .then((data) => (this.data = data))
+      .catch((error) => console.log(error));
+
+      },
+
     deletePost(id) {
       fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
         method: "DELETE",
