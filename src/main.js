@@ -12,10 +12,12 @@ import {
   List,
 } from "ant-design-vue";
 import App from "./App.vue";
+import Router from "vue-router";
+import Vue from "vue";
 
 const app = createApp(App);
 app.config.productionTip = false;
-
+app.use(Router);
 app.use(Button);
 app.use(Menu);
 app.use(Table);

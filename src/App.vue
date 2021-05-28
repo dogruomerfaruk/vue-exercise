@@ -1,4 +1,5 @@
 <template>
+
   <a-layout id="components-layout-demo-responsive">
     <a-layout-sider
       breakpoint="lg"
@@ -12,35 +13,21 @@
       <a-avatar :size="64" icon="user" />
       </div>
       <div class="sider2">
-      <p>ben</p>
+      <p>{{user.name}}</p>
       </div>
       <div class="sider2">
-      <p>omer</p>
+      <p>{{user.email}}</p>
       </div>
       <div class="sider2">
-      <p>faruk</p>
+      <p>{{user.phone}}</p>
       </div>
 
     </a-layout-sider>
+    
     <a-layout>
       <a-layout-content :style="{ margin: '24px 16px 0' }">
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-          <a-form layout="inline" :form="form">
-            <a-form-item label="post title">
-      <input v-model="postTitle"/>
-        
-
-    </a-form-item>
-    <a-form-item label="post content">
-      <input v-model="postContent"/>
-        
-    </a-form-item>
-    <a-form-item :wrapper-col="buttonItemLayout.wrapperCol">
-      <a-button type="primary" v-on:click="handlePost">
-        Submit
-      </a-button>
-    </a-form-item>
-    </a-form>
+          
     <ListView/>
         </div>
 
@@ -51,26 +38,34 @@
       </a-layout-footer>
     </a-layout>
   </a-layout>
-  
+
 </template>
 
 <script>
-import SmileOutlined from '@ant-design/icons-vue/SmileOutlined';
+
 import ListView from './components/List.vue'
 
 export default {
   name: 'App',
   data() {
     return {
-      postTitle: "12",
-      postContent: "",
+
       formLayout: 'horizontal',
+      user:{}
+
     };
   },
   components: {
-    SmileOutlined,
     ListView
   },
+  
+   mounted (){
+    fetch('https://jsonplaceholder.typicode.com/users/1')
+          .then(response => response.json())
+          .then(data => {this.user = data; console.log(data)})
+          .catch(error => console.log(error));
+  },
+
   methods: {
     onCollapse(collapsed, type) {
       console.log(collapsed, type);
@@ -81,21 +76,7 @@ export default {
     handleFormLayoutChange(e) {
       this.formLayout = e.target.value;
     },
-    handlePost(){
-      fetch('https://jsonplaceholder.typicode.com/posts', {
-  method: 'POST',
-  body: JSON.stringify({
-    title: this.postTitle,
-    body: this.postContent,
-    userId: 1,
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-    }
+
   },
   computed: {
     formItemLayout() {
@@ -132,8 +113,10 @@ export default {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  width: 20%;
-  padding-top: 5%;
+  width: 100%;
+  padding-top: 2%;
+  padding-left: 20%;
+  padding-right: 0;
 }
 #components-layout-demo-responsive .ant-layout-sider {
   background: #92b7d1;
