@@ -10,8 +10,8 @@
       <a-button type="primary" v-on:click="handlePost"> Submit </a-button>
     </a-form-item>
   </a-form>
-  <div :style="{ padding: '10%', background: '#fff', minHeight: '360px' }">
-  <ul id="example-1">
+  <div :style="{ padding: '5%', background: '#fff', minHeight: '360px' }">
+  <ul id="example-1" >
     <li v-for="item in data" :key="item.id">
       {{ item.title }}
       <a-button type="link" v-on:click="deletePost(item.id)"> delete </a-button>

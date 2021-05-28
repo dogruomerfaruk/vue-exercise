@@ -1,7 +1,7 @@
 <template>
 
   <a-layout id="components-layout-demo-responsive">
-    <a-row>
+    <a-row :style="{ width:'100%'}">
     <a-layout-sider
       breakpoint="lg"
       collapsed-width="0"
@@ -26,17 +26,15 @@
     </a-layout-sider>
      
     <a-layout>
-      <a-layout-content :style="{ margin: '24px 16px 0' }">
-        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
+      <a-layout-content :style="{ margin: '24px 16px 0', width:'100%'}">
+        <div :style="{ padding: '24px', background: '#fff', minHeight: '360px',width:'100%' }">
           
     <ListView/>
         </div>
 
       
       </a-layout-content>
-      <a-layout-footer style="textAlign: center">
-        
-      </a-layout-footer>
+      <a-layout-footer />
       
     </a-layout>
     </a-row>
